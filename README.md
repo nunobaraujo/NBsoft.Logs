@@ -1,2 +1,2 @@
 # NBsoft.Logs
-Logger Library
+Logger Library for .NET Core
