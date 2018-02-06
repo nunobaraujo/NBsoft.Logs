@@ -10,7 +10,7 @@ namespace NBsoft.Logs
         {
             return WriteLogAsync(item.Level, item.Component, item.Process, item.Context, item.Message, item.Stack, item.Type, item.DateTime);
         }
-        public Task WriteLogAsync(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
+        private Task WriteLogAsync(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
         {
             if (dateTime == null)
                 dateTime = DateTime.UtcNow;

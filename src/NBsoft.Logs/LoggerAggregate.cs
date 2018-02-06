@@ -38,13 +38,7 @@ namespace NBsoft.Logs
                 await logger.WriteLogAsync(item);
             }
         }
-        public async Task WriteLogAsync(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
-        {
-            foreach (var logger in loggers)
-            {
-                await logger.WriteLogAsync(level, component, process, context, message, stack, type, dateTime);
-            }
-        }
+       
         public async Task WriteInfoAsync(string component, string process, string context, string message, DateTime? dateTime = default(DateTime?))
         {
             foreach (var logger in loggers)

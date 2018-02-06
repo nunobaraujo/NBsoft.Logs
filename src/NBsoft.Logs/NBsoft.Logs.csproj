@@ -1,19 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>nunobaraujo</Authors>
     <Company>nbsoft.pt</Company>
     <Description>Logger Library for .NET Core</Description>
-    <Version>1.0.1-beta</Version>
+    <Version>1.0.2</Version>
     <Copyright>© 2017 Nuno Benjamim Salgado Alves de Araújo</Copyright>
     <PackageLicenseUrl>https://github.com/nunobaraujo/NBsoft.Logs/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/nunobaraujo/NBsoft.Logs</PackageProjectUrl>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.4.0-preview2-25405-01" />
-  </ItemGroup>
 
 </Project>

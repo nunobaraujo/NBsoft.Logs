@@ -43,7 +43,7 @@ namespace NBsoft.Logs
                 await WriteBufferToFile(buffer);
         }
 
-        public Task WriteLogAsync(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
+        private Task WriteLogAsync(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
         {
             return WriteLogAsync(new Models.LogItem()
             {
