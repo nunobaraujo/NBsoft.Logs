@@ -1,19 +1,21 @@
 ﻿using NBsoft.Logs.Interfaces;
+using NBsoft.Logs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NBsoft.Logs
 {
     public class FileLogger : ILogger
     {
-        private static readonly object queueLock = new object();
+        private static readonly SemaphoreSlim fileSemaphore = new SemaphoreSlim(1);
 
         private readonly string logPath;
         private readonly int maxQueueBuffer;
         Queue<ILogItem> logQueue;
-        
+
         public FileLogger(string logPath, int maxQueueBuffer = 128)
         {
             this.logPath = logPath;
@@ -25,19 +27,24 @@ namespace NBsoft.Logs
                 logDir.Create();
 
         }
-               
+
         public async Task WriteLogAsync(ILogItem item)
         {
             ILogItem[] buffer = null;
-            lock (queueLock)
+            await fileSemaphore.WaitAsync();
+            try
             {
                 logQueue.Enqueue(item);
                 if (logQueue.Count >= maxQueueBuffer)
                 {
                     buffer = new ILogItem[logQueue.Count];
-                    logQueue.CopyTo(buffer, buffer.Length);
+                    logQueue.CopyTo(buffer, 0);
                     logQueue.Clear();
                 }
+            }
+            finally
+            {
+                fileSemaphore.Release();
             }
             if (buffer != null)
                 await WriteBufferToFile(buffer);
@@ -45,7 +52,7 @@ namespace NBsoft.Logs
 
         private Task WriteLogAsync(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
         {
-            return WriteLogAsync(new Models.LogItem()
+            return WriteLogAsync(new LogItem()
             {
                 Level = level,
                 Component = component,
@@ -56,7 +63,7 @@ namespace NBsoft.Logs
                 Type = type,
                 DateTime = dateTime ?? DateTime.UtcNow
             });
-        }       
+        }
 
         public Task WriteInfoAsync(string component, string process, string context, string message, DateTime? dateTime = default(DateTime?))
         {
@@ -77,7 +84,7 @@ namespace NBsoft.Logs
 
         private async Task WriteBufferToFile(ILogItem[] buffer)
         {
-            
+
             var days = (from l in buffer
                         select l.DateTime.ToString("yyyyMMdd")).Distinct();
 
@@ -97,7 +104,7 @@ namespace NBsoft.Logs
                 using (var filestream = new System.IO.FileStream(assetHistoryFile, System.IO.FileMode.Append, System.IO.FileAccess.Write))
                 using (var textstream = new System.IO.StreamWriter(filestream))
                 {
-                    
+
                     foreach (var item in dayBuffer)
                     {
                         string line = string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}",
