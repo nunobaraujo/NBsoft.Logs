@@ -4,14 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>nunobaraujo</Authors>
     <Company>nbsoft.pt</Company>
-    <Description>Logger Library for .NET Core</Description>
-    <Version>1.0.3</Version>
-    <Copyright>© 2017 Nuno Benjamim Salgado Alves de Araújo</Copyright>
-    <PackageLicenseUrl>https://github.com/nunobaraujo/NBsoft.Logs/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/nunobaraujo/NBsoft.Logs</PackageProjectUrl>
+    <Description>Logger Library for .NET Standard</Description>
+    <Version>1.0.5</Version>
+    <Copyright>© 2018 Nuno Benjamim Salgado Alves de Araújo</Copyright>
+    <PackageLicenseUrl>https://github.com/nunobaraujo/NBsoft.Logs.Sql/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nunobaraujo/NBsoft.Logs.Sql</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>1.0.3.0</FileVersion>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <PackageIconUrl>http://nbsoft.pt/V1/favicon.ico</PackageIconUrl>
   </PropertyGroup>
 
 </Project>

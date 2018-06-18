@@ -69,6 +69,42 @@ namespace NBsoft.Logs
             }
         }
 
+        public void WriteLog(ILogItem item)
+        {
+            foreach (var logger in loggers)
+            {
+                logger.WriteLog(item);
+            }
+        }
+        public void WriteInfo(string component, string process, string context, string message, DateTime? dateTime = null)
+        {
+            foreach (var logger in loggers)
+            {
+                logger.WriteInfo(component, process, context, message, dateTime);
+            }
+        }
+        public void WriteWarning(string component, string process, string context, string message, DateTime? dateTime = null)
+        {
+            foreach (var logger in loggers)
+            {
+                logger.WriteWarning(component, process, context, message, dateTime);
+            }
+        }
+        public void WriteError(string component, string process, string context, Exception exception, DateTime? dateTime = null)
+        {
+            foreach (var logger in loggers)
+            {
+                logger.WriteError(component, process, context, exception, dateTime);
+            }
+        }
+        public void WriteFatalError(string component, string process, string context, Exception exception, DateTime? dateTime = null)
+        {
+            foreach (var logger in loggers)
+            {
+                logger.WriteFatalError(component, process, context, exception, dateTime);
+            }
+        }
+
         public void Dispose()
         {
             foreach (var logger in loggers)
@@ -76,5 +112,7 @@ namespace NBsoft.Logs
                 logger.Dispose();
             }
         }
+
+        
     }
 }
