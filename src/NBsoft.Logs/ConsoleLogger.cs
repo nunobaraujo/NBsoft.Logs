@@ -6,6 +6,19 @@ namespace NBsoft.Logs
 {
     public class ConsoleLogger : ILogger
     {
+        private const string DefaultFormat = "{0} -- {1} - {2}|{3}|{4}|{5}|{6}";
+        private readonly string _logFormat;
+
+        public ConsoleLogger()            
+            :this (DefaultFormat)
+        {            
+        }
+        public ConsoleLogger(string logFormat)
+        {
+            _logFormat = logFormat;
+            string logTest = string.Format(_logFormat, "1", "2", "3", "4", "5", "6", "7");
+        }
+
         private Task WriteLogAsync(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
         {
             WriteLog(level, component, process, context, message, stack, type, dateTime);
@@ -13,9 +26,10 @@ namespace NBsoft.Logs
         }
         private void WriteLog(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
         {
+            
             if (dateTime == null)
                 dateTime = DateTime.UtcNow;
-            Console.WriteLine("{0}<{1}>{2}|{3}|{4}|{5}|{6}",
+            Console.WriteLine(_logFormat,
                 dateTime.Value.ToString("HH:mm:ss.fff"),
                 level.ToString().ToUpper().Substring(0, 3),
                 component,
