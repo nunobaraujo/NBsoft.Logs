@@ -54,18 +54,18 @@ namespace NBsoft.Logs
                 await logger.WriteWarningAsync(component, process, context, message, dateTime);
             }
         }
-        public async Task WriteErrorAsync(string component, string process, string context, Exception exception, DateTime? dateTime = default(DateTime?))
+        public async Task WriteErrorAsync(string component, string process, string context, string message, Exception exception, DateTime? dateTime = default(DateTime?))
         {
             foreach (var logger in loggers)
             {
-                await logger.WriteErrorAsync(component, process, context, exception, dateTime);
+                await logger.WriteErrorAsync(component, process, context, message, exception, dateTime);
             }
         }
-        public async Task WriteFatalErrorAsync(string component, string process, string context, Exception exception, DateTime? dateTime = default(DateTime?))
+        public async Task WriteFatalErrorAsync(string component, string process, string context, string message, Exception exception, DateTime? dateTime = default(DateTime?))
         {
             foreach (var logger in loggers)
             {
-                await logger.WriteFatalErrorAsync(component, process, context, exception, dateTime);
+                await logger.WriteFatalErrorAsync(component, process, context, message, exception, dateTime);
             }
         }
 
@@ -90,18 +90,18 @@ namespace NBsoft.Logs
                 logger.WriteWarning(component, process, context, message, dateTime);
             }
         }
-        public void WriteError(string component, string process, string context, Exception exception, DateTime? dateTime = null)
+        public void WriteError(string component, string process, string context, string message, Exception exception, DateTime? dateTime = null)
         {
             foreach (var logger in loggers)
             {
-                logger.WriteError(component, process, context, exception, dateTime);
+                logger.WriteError(component, process, context, message, exception, dateTime);
             }
         }
-        public void WriteFatalError(string component, string process, string context, Exception exception, DateTime? dateTime = null)
+        public void WriteFatalError(string component, string process, string context, string message, Exception exception, DateTime? dateTime = null)
         {
             foreach (var logger in loggers)
             {
-                logger.WriteFatalError(component, process, context, exception, dateTime);
+                logger.WriteFatalError(component, process, context, message, exception, dateTime);
             }
         }
 
