@@ -1,22 +1,28 @@
 ﻿using NBsoft.Logs.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NBsoft.Logs
 {
     public class ConsoleLogger : ILogger
-    {
-        private const string DefaultFormat = "{0} -- {1} - {2}|{3}|{4}|{5}|{6}";
-        private readonly string _logFormat;
+    {   
+        public readonly ConsoleLoggerOptions Options;
 
         public ConsoleLogger()            
-            :this (DefaultFormat)
+            :this (new ConsoleLoggerOptions
+            {
+                DateFormat = "HH:mm:ss.fff",
+                ShowComponent = true,
+                ShowContext = true,
+                ShowProcess = true,
+                ShowType = false
+            })
         {            
         }
-        public ConsoleLogger(string logFormat)
+        public ConsoleLogger(ConsoleLoggerOptions options)
         {
-            _logFormat = logFormat;
-            string logTest = string.Format(_logFormat, "1", "2", "3", "4", "5", "6", "7");
+            this.Options = options;
         }
 
         private Task WriteLogAsync(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
@@ -25,18 +31,42 @@ namespace NBsoft.Logs
             return Task.FromResult(0);
         }
         private void WriteLog(LogType level, string component, string process, string context, string message, string stack, string type, DateTime? dateTime = default(DateTime?))
-        {
-            
+        {   
             if (dateTime == null)
                 dateTime = DateTime.UtcNow;
-            Console.WriteLine(_logFormat,
-                dateTime.Value.ToString("HH:mm:ss.fff"),
-                level.ToString().ToUpper().Substring(0, 3),
-                component,
-                process,
-                context,
-                type,
-                message);
+
+            var format = "{0} | [{1}]";
+            var parameters = new List<string>
+            {
+                dateTime.Value.ToString(Options.DateFormat),
+                level.ToString().ToUpper().Substring(0, 3)
+            };
+            int i = 2;
+            if (Options.ShowComponent && !string.IsNullOrEmpty(component))
+            {
+                format += $" | {{{i++}}}";
+                parameters.Add(component);
+            }
+            if (Options.ShowProcess && !string.IsNullOrEmpty(process))
+            {
+                format += $" | {{{i++}}}";
+                parameters.Add(process);
+            }
+            if (Options.ShowContext && !string.IsNullOrEmpty(context))
+            {
+                format += $" | {{{i++}}}";
+                parameters.Add(context);
+            }
+            if (Options.ShowType && !string.IsNullOrEmpty(type))
+            {
+                format += $" | {{{i++}}}";
+                parameters.Add(type);
+            }
+            format += $" | {{{i++}}}";
+            parameters.Add(message);
+
+
+            Console.WriteLine(format, parameters.ToArray());
             if (stack != null)
             {
                 Console.WriteLine("-------STACK------");
