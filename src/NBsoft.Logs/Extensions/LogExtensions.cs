@@ -95,7 +95,11 @@ namespace NBsoft.Logs
             // External caller is stack line 2
 
             var frame = stack?.GetFrame(2);
-            return frame.GetMethod().ReflectedType.ToString();
+            var comp = frame.GetMethod().ReflectedType.ToString();
+            var anonymousSignIndex = comp.IndexOf('+');
+            if (anonymousSignIndex > 0)
+                comp = comp.Substring(0, anonymousSignIndex);
+            return comp;
         }
     }
 }
