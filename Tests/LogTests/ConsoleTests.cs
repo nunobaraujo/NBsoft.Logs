@@ -1,5 +1,5 @@
+using NBsoft.Logs;
 using NBsoft.Logs.Interfaces;
-using NBsoft.Logs.Extensions;
 using NUnit.Framework;
 using System.IO;
 using System;
@@ -13,7 +13,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            logger = new NBsoft.Logs.ConsoleLogger();
+            logger = new ConsoleLogger();
         }
 
         #region Sync

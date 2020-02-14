@@ -5,16 +5,29 @@
     <Authors>nunobaraujo</Authors>
     <Company>nbsoft.pt</Company>
     <Description>Logger Library for .NET Standard</Description>
-    <Version>2.0.2</Version>
-    <Copyright>© 2018 Nuno Benjamim Salgado Alves de Araújo</Copyright>
-    <PackageLicenseUrl>https://github.com/nunobaraujo/NBsoft.Logs/blob/master/LICENSE</PackageLicenseUrl>
+    <Version>2.0.4</Version>
+    <Copyright>© 2020 Nuno Benjamim Salgado Alves de Araújo</Copyright>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>http://www.nbsoft.pt/V1/InvXPress/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <FileVersion>1.0.4.0</FileVersion>
     <AssemblyVersion>2</AssemblyVersion>
-    <PackageIconUrl>http://nbsoft.pt/V1/favicon.ico</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
     <PackageTags>log logging logfile</PackageTags>
     <RepositoryUrl>https://github.com/nunobaraujo/NBsoft.Logs</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>NB.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\NB.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

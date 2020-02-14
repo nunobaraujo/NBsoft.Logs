@@ -1,19 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26621.2
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBsoft.Logs", "src\NBsoft.Logs\NBsoft.Logs.csproj", "{04B48DC5-64EF-4854-9622-F1AC8C080A82}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C09179E-8FA1-4989-99B7-3FB7F55752B3}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		LICENSE = LICENSE
+		NB.png = NB.png
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogTests", "Tests\LogTests\LogTests.csproj", "{82DB6B8B-9214-4FF7-88E2-1B877C71DAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "tests\TestConsole\TestConsole.csproj", "{F5031F43-6AA9-4DEC-9380-F0D39F1BE768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "tests\TestConsole\TestConsole.csproj", "{F5031F43-6AA9-4DEC-9380-F0D39F1BE768}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

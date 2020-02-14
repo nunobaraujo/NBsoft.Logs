@@ -1,5 +1,4 @@
-﻿using NBsoft.Logs.Interfaces;
-using NBsoft.Logs.Extensions;
+﻿using NBsoft.Logs;
 using System;
 using System.IO;
 
@@ -16,7 +15,7 @@ namespace TestConsole
 
         private static void TestInfo()
         {
-            var logger = new NBsoft.Logs.ConsoleLogger();
+            var logger = new ConsoleLogger();
             var sw = new StringWriter();
             Console.SetOut(sw);
             Console.SetError(sw);
@@ -26,7 +25,7 @@ namespace TestConsole
             logger.Info("lala", now);
 
             string result = sw.ToString();
-            var shouldBe = $"{now.ToString("HH:mm:ss.fff")} | [INF] | TestConsole.Program | TestInfo | lala\r\n";
+            var shouldBe = $"{now.ToString("HH:mm:ss.fff")}|[INF]|(...)Console.Program|TestInfo|lala\r\n";
             if (result != shouldBe)
                 throw new ApplicationException();
         }
@@ -34,7 +33,7 @@ namespace TestConsole
 
         private static void TestAsyncConsole()
         {
-            var logger = new NBsoft.Logs.ConsoleLogger();
+            var logger = new ConsoleLogger();
             var sw = new StringWriter();
             Console.SetOut(sw);
             Console.SetError(sw);
@@ -44,7 +43,7 @@ namespace TestConsole
             logger.InfoAsync("lala", now).Wait();
 
             string result = sw.ToString();
-            var shouldBe = $"{now.ToString("HH:mm:ss.fff")} | [INF] | TestConsole.Program | TestAsyncConsole | lala\r\n";
+            var shouldBe = $"{now.ToString("HH:mm:ss.fff")}|[INF]|(...)Console.Program|TestAsyncConsole|lala\r\n";
             if (result != shouldBe)
                 throw new ApplicationException();
         }
@@ -52,7 +51,7 @@ namespace TestConsole
 
         private static void TestAsyncError()
         {
-            var logger = new NBsoft.Logs.ConsoleLogger();
+            var logger = new ConsoleLogger();
             var sw = new StringWriter();
             Console.SetOut(sw);
             Console.SetError(sw);
@@ -62,7 +61,7 @@ namespace TestConsole
             logger.ErrorAsync("lala",new DriveNotFoundException("S1",new ApplicationException("S2")), now).Wait();
 
             string result = sw.ToString();
-            var shouldBe = $"{now.ToString("HH:mm:ss.fff")} | [ERR] | TestConsole.Program | TestAsyncError | lala - S1\r\n";
+            var shouldBe = $"{now.ToString("HH:mm:ss.fff")}|[ERR]|(...)Console.Program|TestAsyncError|lala - S1\r\n";
             if (result != shouldBe)
                 throw new ApplicationException();
         }

@@ -5,44 +5,45 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace NBsoft.Logs.Extensions
+namespace NBsoft.Logs
 {
     public static class LogExtensions
     {
-        public async static Task DebugAsync(this ILogger logger, string message, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public async static Task DebugAsync(this ILogger logger, string message, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {
             await logger.WriteLogAsync(new LogItem {
                 DateTime = time ?? DateTime.Now,
                 Level = LogType.Debug,
                 Component = GetAsyncComponent(),
                 Process = callerName,
-                Message = message
+                Message = message,
+                Context = context
             });
         }
 
-        public async static Task InfoAsync(this ILogger logger, string message, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public async static Task InfoAsync(this ILogger logger, string message, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {   
-            await logger.WriteInfoAsync(GetAsyncComponent(), callerName, null, message, time);
+            await logger.WriteInfoAsync(GetAsyncComponent(), callerName, context, message, time);
         }
 
-        public async static Task WarningAsync(this ILogger logger, string message, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public async static Task WarningAsync(this ILogger logger, string message, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {   
-            await logger.WriteWarningAsync(GetAsyncComponent(), callerName, null, message, time);
+            await logger.WriteWarningAsync(GetAsyncComponent(), callerName, context, message, time);
         }
 
-        public async static Task ErrorAsync(this ILogger logger, string message, Exception ex, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public async static Task ErrorAsync(this ILogger logger, string message, Exception ex, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {
-            await logger.WriteErrorAsync(GetAsyncComponent(), callerName, null, message, ex, time);
+            await logger.WriteErrorAsync(GetAsyncComponent(), callerName, context, message, ex, time);
         }
 
-        public async static Task FatalErrorAsync(this ILogger logger, string message, Exception ex, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public async static Task FatalErrorAsync(this ILogger logger, string message, Exception ex, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {
-            await logger.WriteFatalErrorAsync(GetAsyncComponent(), callerName, null, message, ex, time);
+            await logger.WriteFatalErrorAsync(GetAsyncComponent(), callerName, context, message, ex, time);
         }
 
 
 
-        public static void Debug(this ILogger logger, string message, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public static void Debug(this ILogger logger, string message, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {
             logger.WriteLog(new LogItem
             {
@@ -50,28 +51,29 @@ namespace NBsoft.Logs.Extensions
                 Level = LogType.Debug,
                 Component = GetComponent(),
                 Process = callerName,
-                Message = message
+                Message = message,
+                Context = context
             });
         }
 
-        public static void Info(this ILogger logger, string message, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public static void Info(this ILogger logger, string message, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {
-            logger.WriteInfoAsync(GetComponent(), callerName, null, message, time);
+            logger.WriteInfo(GetComponent(), callerName, context, message, time);
         }
 
-        public static void Warning(this ILogger logger, string message, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public static void Warning(this ILogger logger, string message, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {
-            logger.WriteWarning(GetComponent(), callerName, null, message, time);
+            logger.WriteWarning(GetComponent(), callerName, context, message, time);
         }
 
-        public static void Error(this ILogger logger, string message, Exception ex, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public static void Error(this ILogger logger, string message, Exception ex, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {
-            logger.WriteError(GetComponent(), callerName, null, message, ex, time);
+            logger.WriteError(GetComponent(), callerName, context, message, ex, time);
         }
 
-        public static void FatalError(this ILogger logger, string message, Exception ex, DateTime? time = null, [CallerMemberName] string callerName = "")
+        public static void FatalError(this ILogger logger, string message, Exception ex, DateTime? time = null, string context = null, [CallerMemberName] string callerName = "")
         {
-            logger.WriteFatalError(GetComponent(), callerName, null, message, ex, time);
+            logger.WriteFatalError(GetComponent(), callerName, context, message, ex, time);
         }
 
         private static string GetAsyncComponent()

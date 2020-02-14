@@ -35,7 +35,7 @@ namespace NBsoft.Logs
             if (dateTime == null)
                 dateTime = DateTime.UtcNow;
 
-            var format = "{0} | [{1}]";
+            var format = "{0}|[{1}]";
             var parameters = new List<string>
             {
                 dateTime.Value.ToString(Options.DateFormat),
@@ -44,25 +44,26 @@ namespace NBsoft.Logs
             int i = 2;
             if (Options.ShowComponent && !string.IsNullOrEmpty(component))
             {
-                format += $" | {{{i++}}}";
-                parameters.Add(component);
+                format += $"|{{{i++}}}";
+                var componentText = component.Length > 15 ? "(...)"+component.Substring(component.Length - 15, 15): component;
+                parameters.Add(componentText);
             }
             if (Options.ShowProcess && !string.IsNullOrEmpty(process))
             {
-                format += $" | {{{i++}}}";
+                format += $"|{{{i++}}}";
                 parameters.Add(process);
             }
             if (Options.ShowContext && !string.IsNullOrEmpty(context))
             {
-                format += $" | {{{i++}}}";
+                format += $"|{{{i++}}}";
                 parameters.Add(context);
             }
             if (Options.ShowType && !string.IsNullOrEmpty(type))
             {
-                format += $" | {{{i++}}}";
+                format += $"|{{{i++}}}";
                 parameters.Add(type);
             }
-            format += $" | {{{i++}}}";
+            format += $"|{{{i++}}}";
             parameters.Add(message);
 
 
