@@ -1,5 +1,4 @@
-﻿using NBsoft.Logs.Interfaces;
-using NBsoft.Logs.Models;
+﻿using NBsoft.Logs.Models;
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -85,7 +84,19 @@ namespace NBsoft.Logs
             // External caller is stack line 4
 
             var frame = stack?.GetFrame(4);
-            return frame.GetMethod().ReflectedType.ToString();
+            var comp = frame.GetMethod().ReflectedType.ToString();
+            var anonymousSignIndex = comp.IndexOf('+');
+            if (anonymousSignIndex > 0)
+                comp = comp.Substring(0, anonymousSignIndex);
+            if (comp.Contains("NBsoft.Logs.LogExtensions"))
+            {
+                frame = stack?.GetFrame(5);
+                comp = frame.GetMethod().ReflectedType.ToString();
+                anonymousSignIndex = comp.IndexOf('+');
+                if (anonymousSignIndex > 0)
+                    comp = comp.Substring(0, anonymousSignIndex);
+            }
+            return comp;
         }
         private static string GetComponent()
         {
@@ -99,6 +110,15 @@ namespace NBsoft.Logs
             var anonymousSignIndex = comp.IndexOf('+');
             if (anonymousSignIndex > 0)
                 comp = comp.Substring(0, anonymousSignIndex);
+            if (comp.Contains("NBsoft.Logs.LogExtensions"))
+            {
+                frame = stack?.GetFrame(3);
+                comp = frame.GetMethod().ReflectedType.ToString();
+                anonymousSignIndex = comp.IndexOf('+');
+                if (anonymousSignIndex > 0)
+                    comp = comp.Substring(0, anonymousSignIndex);
+            }
+
             return comp;
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NBsoft.Logs.Interfaces
+namespace NBsoft.Logs
 {
     public interface ILogItem
     {

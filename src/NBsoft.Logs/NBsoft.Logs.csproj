@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>nunobaraujo</Authors>
     <Company>nbsoft.pt</Company>
     <Description>Logger Library for .NET Standard</Description>
-    <Version>2.0.5</Version>
-    <Copyright>© 2020 Nuno Benjamim Salgado Alves de Araújo</Copyright>
+    <Version>2.1.0</Version>
+    <Copyright>© 2017-2020 Nuno Benjamim Salgado Alves de Araújo</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>http://www.nbsoft.pt/V1/InvXPress/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

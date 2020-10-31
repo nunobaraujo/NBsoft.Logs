@@ -1,5 +1,4 @@
-﻿using NBsoft.Logs.Interfaces;
-using NBsoft.Logs.Models;
+﻿using NBsoft.Logs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

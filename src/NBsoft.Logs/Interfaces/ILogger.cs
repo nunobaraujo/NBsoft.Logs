@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace NBsoft.Logs.Interfaces
+namespace NBsoft.Logs
 {
     public interface ILogger : IDisposable
     {

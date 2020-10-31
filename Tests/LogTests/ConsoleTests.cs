@@ -1,8 +1,7 @@
 using NBsoft.Logs;
-using NBsoft.Logs.Interfaces;
 using NUnit.Framework;
-using System.IO;
 using System;
+using System.IO;
 
 namespace Tests
 {
